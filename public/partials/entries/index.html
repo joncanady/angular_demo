@@ -1,0 +1,31 @@
+<div ng-controller="RaffleIndexCtrl">
+  <p>
+    <label for="query"> Search
+    <input type="text" id="query" ng-model="query.name">
+    <span ng-show="query.name">
+      Searching for "{{query.name}}"
+      Found {{(entries | filter:query).length}} results.
+    </span>
+  </p>
+
+  <form ng-submit="addEntry()">
+    <input type="text" placeholder="Name" ng-required="true" ng-model="newEntry.name">
+  </form>
+
+  <ul>
+    <li class="name" ng-click="declareWinner(entry)" ng-repeat="entry in entries | filter:query">
+      <span ng-class="{highlight: entry == lastWinner}">
+        <img class="avatar" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
+        {{entry.name}}
+        &mdash;
+        <a href="#/entries/{{entry.id}}">View</a>
+        &mdash;
+        <button ng-click="deleteEntry(entry)">Delete</button>
+        <span ng-show="entry.winner" class="winner">Winner</span>
+      </span>
+    </li>
+  </ul>
+
+  <button ng-click="drawWinner()">Draw Winner</button>
+  <button ng-click="resetWinners()">Reset Winners</button>
+</div>

@@ -1,0 +1,9 @@
+<li class="name" ng-click="declareWinner(entry)" ng-model="entry">
+  <span ng-class="{highlight: entry == lastWinner}">
+    <img class="avatar" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
+    {{entry.name}}
+    &mdash;
+    <span ng-show="entry.winner" class="winner">Winner</span>
+    <a href="#/entries">Back</a>
+  </span>
+</li>

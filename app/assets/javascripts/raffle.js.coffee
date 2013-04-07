@@ -1,9 +1,22 @@
-app = angular.module("Raffler", ["ngResource"])
+angular.module("RafflerRouter", []).config ["$routeProvider", ($routeProvider) ->
+  $routeProvider.when("/entries",
+    templateUrl: "partials/entries/index.html"
+    controller: @RaffleIndexCtrl
+  ).when("/entries/:id",
+    templateUrl: "partials/entries/show.html"
+    controller: @RaffleShowCtrl
+  ).otherwise redirectTo: "/entries"
+]
+
+app = angular.module("Raffler", ["ngResource", "RafflerRouter"])
 
 app.factory "Entry", ($resource) ->
   $resource("/entries/:id", {id: "@id", "api_version": 2}, {update: {method: "PUT"}})
 
-@RaffleCtrl = ($scope, Entry) ->
+@RaffleShowCtrl = ($scope, $routeParams, Entry) ->
+  $scope.entry = Entry.get(id: $routeParams.id)
+
+@RaffleIndexCtrl = ($scope, Entry) ->
   $scope.entries = Entry.query()
 
   $scope.addEntry = ->
