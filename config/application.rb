@@ -58,5 +58,8 @@ module Angular
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.view_versions = (1...4)
+    config.view_version_extraction_strategy = :query_parameter
   end
 end
