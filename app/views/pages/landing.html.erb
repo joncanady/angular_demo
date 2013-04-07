@@ -11,14 +11,16 @@
   </p>
 
   <form ng-submit="addEntry()">
-    <input type="text" ng-model="newEntry.name">
+    <input type="text" placeholder="Name" ng-required="true" ng-model="newEntry.name">
   </form>
 
   <ul>
-    <li ng-repeat="entry in entries | filter:query">
+    <li class="name" ng-click="declareWinner(entry)" ng-repeat="entry in entries | filter:query">
       <span ng-class="{highlight: entry == lastWinner}">
-        <img class="avatar" ng-click="declareWinner(entry)" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
+        <img class="avatar" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
         {{entry.name}}
+        &mdash;
+        <button ng-click="deleteEntry(entry)">Delete</button>
         <span ng-show="entry.winner" class="winner">Winner</span>
       </span>
     </li>

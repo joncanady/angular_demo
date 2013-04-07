@@ -35,3 +35,9 @@ app.factory "Entry", ($resource) ->
       $scope.lastWinner = entry
       entry.winner = true
       entry.$update()
+
+  $scope.deleteEntry = (entry) ->
+    entry.$delete()
+    index = $scope.entries.indexOf(entry)
+    $scope.entries.splice(index, 1)
+
