@@ -30,3 +30,8 @@ app.factory "Entry", ($resource) ->
         entry.winner = false
         entry.$update()
 
+  $scope.declareWinner = (entry) ->
+    unless entry.winner
+      $scope.lastWinner = entry
+      entry.winner = true
+      entry.$update()

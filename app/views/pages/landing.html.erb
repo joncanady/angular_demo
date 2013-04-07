@@ -17,7 +17,7 @@
   <ul>
     <li ng-repeat="entry in entries | filter:query">
       <span ng-class="{highlight: entry == lastWinner}">
-        <img class="avatar" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
+        <img class="avatar" ng-click="declareWinner(entry)" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
         {{entry.name}}
         <span ng-show="entry.winner" class="winner">Winner</span>
       </span>
