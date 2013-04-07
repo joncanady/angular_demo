@@ -13,7 +13,7 @@
   </form>
 
   <ul>
-    <li class="name" ng-click="declareWinner(entry)" ng-repeat="entry in entries | filter:query">
+    <li class="name" ng-repeat="entry in entries | filter:query">
       <span ng-class="{highlight: entry == lastWinner}">
         <img class="avatar" ng-show="entry.avatar_url" ng-src="{{entry.avatar_url}}">
         {{entry.name}}
@@ -21,6 +21,10 @@
         <a href="#/entries/{{entry.id}}">View</a>
         &mdash;
         <button ng-click="deleteEntry(entry)">Delete</button>
+        <span ng-show="!entry.winner">
+          &mdash;
+          <button ng-click="declareWinner(entry)">Winner?</button>
+        </span>
         <span ng-show="entry.winner" class="winner">Winner</span>
       </span>
     </li>

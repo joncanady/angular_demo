@@ -1,3 +1,5 @@
+app = angular.module("Raffler", ["ngResource", "RafflerRouter"])
+
 angular.module("RafflerRouter", []).config ["$routeProvider", ($routeProvider) ->
   $routeProvider.when("/entries",
     templateUrl: "partials/entries/index.html"
@@ -7,8 +9,6 @@ angular.module("RafflerRouter", []).config ["$routeProvider", ($routeProvider) -
     controller: @RaffleShowCtrl
   ).otherwise redirectTo: "/entries"
 ]
-
-app = angular.module("Raffler", ["ngResource", "RafflerRouter"])
 
 app.factory "Entry", ($resource) ->
   $resource("/entries/:id", {id: "@id", "api_version": 2}, {update: {method: "PUT"}})
@@ -50,6 +50,7 @@ app.factory "Entry", ($resource) ->
       entry.$update()
 
   $scope.deleteEntry = (entry) ->
+    $scope.lastWinner = null if entry is $scope.lastWinner
     entry.$delete()
     index = $scope.entries.indexOf(entry)
     $scope.entries.splice(index, 1)
